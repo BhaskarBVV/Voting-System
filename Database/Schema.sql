@@ -1,14 +1,9 @@
-show databases;
-create database voting; 
-use voting;
-show tables;
-
 create table User (
  UserId int primary key,
  Name Varchar (25) not null,
  Father_Name Varchar (25) not null,
  Aadhaar_number int not null unique,
- age int not null check(age>=18),
+ age int not null,
  contact int not null unique,
  Email varchar (20) not null unique,
  city varchar (20) not null,
@@ -16,16 +11,14 @@ create table User (
  gender varchar(7) not null
 );
 
-desc user;
 insert into user values(1,"Bhaskar","Kanhiya Lal",432893,22,1234567890,"abc@gmail.com","Hathras", "1234","Male");
-select * from User;
+
 
 create table Role (
  UserId int not null,
  RoleId int not null,
  foreign key (UserId) references User(UserId)
 );
-desc Role;
 
  create table Approval (
  UserId int not null,

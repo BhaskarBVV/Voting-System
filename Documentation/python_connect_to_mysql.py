@@ -9,3 +9,5 @@ for i in result:
     print(i)
 
 print("Successfully executed")
+
+# not part of actual code, only the demo on how to connnect to the database.

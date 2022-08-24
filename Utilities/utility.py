@@ -18,12 +18,11 @@ class util:
     def write_data(sql_command):
         connection, my_cursor=util.start_connection()
         my_cursor.execute(sql_command)
-        my_cursor.execute(sql_command)
         connection.commit()
         connection.close()
 
-    def find_id(ID):
-        sql_command='select * from user where UserId={}'.format(str(ID))
+    def find_id(id):
+        sql_command='select * from user where UserId={}'.format(str(id))
         return util.fetch_data(sql_command)
         
     def get_number_of_records():

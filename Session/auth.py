@@ -1,15 +1,15 @@
 import Session.registration as registration
-import administrator.admin_choice as admin_choice
 import bcrypt
-import Regular_user.user_choice as user_choice
 import maskpass
 import Utilities.utility as utility
+import configuration.config as cf
+import user.user_choice
 
 class Auth:
 
     def login():
-        Id = input("Enter your Id : ")
-        current_user_from_db = list(utility.util.find_id(Id))
+        user_id = input("Enter your Id : ")
+        current_user_from_db = list(utility.util.find_id(user_id))
 
         if len(current_user_from_db)==0:
             print("No such user fouund, try again...")
@@ -28,14 +28,12 @@ class Auth:
 
         print(f"Hello {current_user_from_db[0][1]}")
 
-        user_type=utility.util.get_user_type(Id)
+        user_type=utility.util.get_user_type(user_id)
         user_type=user_type[0][0]
-        # print(user_type)
-        match user_type:
-            case 0:
-                user_choice.UserOp.list_of_op()
-            case 1:
-                admin_choice.AdminOp.list_of_op()
+        print(user_type)
+        # available_operations=cf.roles[user_type]
+        # user_choice=user.user_choice.options.get_choice(available_operations)
+        # cf.role_function_mapping[user_choice]
     
 
 

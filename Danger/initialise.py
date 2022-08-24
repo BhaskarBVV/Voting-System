@@ -2,7 +2,8 @@ import mysql.connector
 import bcrypt
 
 class Initialise:
-    def set_tables():
+    
+    def set_tables(self):
         connection=mysql.connector.connect(host='localhost', user='root', passwd='1234', database='project2')
         my_cursor=connection.cursor()
 

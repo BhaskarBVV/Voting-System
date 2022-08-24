@@ -1,0 +1,116 @@
+class main:
+    def login():
+        # enter name, mother name, father name, city, 
+        # fetch result from the table,
+        
+        # if role=="admin 1":
+        #     class admin():
+                # all operations:
+                # 1) check all the pending new user approvals
+                # 2) check all the pending old user details modification
+                # 3) approve user as admin.
+                # 4) add party to stand in election tables
+                # 5) start election, and send notification mail to all users to vote within 24 hrs.
+                # 6) close the voting.
+                # 7) del user.
+                # 8) Release the results
+                # pass
+        # elif role=="normal_user 0":
+        #     class normal_user:
+                # 1) edit the details
+                # 2) vote 
+                # 3) check if i am approved
+                # 4) apply for becoming as admin.
+                # pass
+        pass
+
+    def logout(): 
+        pass#just press 0 and return
+    def Sign_up():
+        pass # create_new_user()
+
+
+
+#-----------------------------------------------------Commands---------------------------------------------------------------
+
+# create table User (
+# Id int not null primary key,
+# Name Varchar (25) not null,
+# Father_Name Varchar (25) not null,
+# Aadhaar_number int not null,
+# age int not null,
+# contact varchar (10) not null unique,
+# Email varchar (20) not null unique,
+# city varchar (20) not null,
+# passwd varchar (40) not null
+# );
+# insert into user values(1,"Bhaskar","Kanhiya Lal",432893,22,1234567890,"abc@gmail.com","Hathras", "1234");
+
+# create table Role (
+# UserId int not null primary key,
+# RoleId int not null
+# );
+
+# create table Approval (
+# UserId int not null primary key,
+# IsApproved bool not null
+# );
+
+
+# create table VoteRecord (
+# UserId int not null primary key,
+# Vstatus bool not null,
+# VoteId int not null
+# );
+
+
+# create table Party (
+# PartyID int not null primary key,
+# PartyName varchar(20) not null
+# );
+
+
+
+
+# Updated:
+# create table User (
+#  UserId int primary key,
+#  Name Varchar (25) not null,
+#  Father_Name Varchar (25) not null,
+#  Aadhaar_number int not null unique,
+#  age int not null check(age>=18),
+#  contact int not null unique,
+#  Email varchar (20) not null unique,
+#  city varchar (20) not null,
+#  passwd varchar (40) not null,
+#  gender varchar(7) not null
+# );
+
+# desc user;
+# insert into user values(1,"Bhaskar","Kanhiya Lal",432893,22,1234567890,"abc@gmail.com","Hathras", "1234","Male");
+# select * from User;
+
+# create table Role (
+#  UserId int not null,
+#  RoleId int not null,
+#  foreign key (UserId) references User(UserId)
+# );
+# desc Role;
+
+#  create table Approval (
+#  UserId int not null,
+#  IsApproved bool not null,
+#  foreign key (UserId) references user(UserId)
+# );
+
+# create table VoteRecord (
+# UserId int not null,
+# Vstatus bool not null,
+# VoteId int not null,
+# foreign key (UserId) references user(UserId)
+# );
+
+#  create table Party (
+#  PartyID int not null primary key,
+#  PartyName varchar(20) not null
+# );

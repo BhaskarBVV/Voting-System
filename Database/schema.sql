@@ -17,7 +17,6 @@ create table Role (
  RoleId int not null,
  foreign key (UserId) references User(UserId)
 );
-desc Role;
 
  create table Approval (
  UserId int not null,

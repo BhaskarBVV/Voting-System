@@ -1,7 +1,7 @@
-import Session.registration as registration
+import session.registration as registration
 import bcrypt
 import maskpass
-import Utilities.utility as utility
+import utilities.utility as utility
 import configuration.config as cf
 import user.user_choice
 

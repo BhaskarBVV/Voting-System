@@ -1,4 +1,4 @@
-import Session.auth as begin_session
+import session.auth as begin_session
 class Main:
 
     def entry_loop():

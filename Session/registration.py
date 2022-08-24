@@ -1,7 +1,7 @@
 import maskpass
 from configuration.config import input_line as il
 import bcrypt
-import Utilities.utility as utility
+import utilities.utility as utility
 class Register:
 
     def reg_new_user():

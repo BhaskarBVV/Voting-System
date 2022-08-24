@@ -1,7 +1,7 @@
 import admin
 
 class AdminOp:
-    def list_of_op():
+    def list_of_op(self):
         print("Enter 1 to see if there is any ongoing elections: ")
         print("If Not than Press 2 to start elections: ")
         print("Press 3 to add party: ")
@@ -11,7 +11,7 @@ class AdminOp:
         print("Press 7 to see Results: ")
         try:
             choice=int(input("Enter choice: "))
-        except:
+        except TypeError:
             print("Wrong Input!! Please enter again!")
             list_of_op()
         else:

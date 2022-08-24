@@ -2,7 +2,7 @@ import session.auth as begin_session
 class Main:
 
     def entry_loop():
-        print("\n========================**DASHBOARD**==============================\n")
+        print("\n=======================**DASHBOARD**=============================\n")
         print("Enter 1 to Sign Up")
         print("Enter 2 to Sign In")
         print("Enter 0 to exit")

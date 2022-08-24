@@ -1,0 +1,2 @@
+Please call initialise.py file only when, you need to reset the database.
+Remember all the data excluding the admin details will be erased, use only in emergency.

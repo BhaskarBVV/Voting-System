@@ -30,6 +30,7 @@ class Initialise:
 
 
         admin_pass="".join(str(bcrypt.hashpw("1234".encode('utf-8'), bcrypt.gensalt()).decode()))
+        print(admin_pass)
         sql=f'insert into User values(1,"Admin","father",432893,22,1234567890,"abc@gmail.com","XYZ", "{admin_pass}");'
         my_cursor.execute(sql)
         connection.commit()

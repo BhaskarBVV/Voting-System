@@ -10,22 +10,31 @@ class Auth:
 
     def login():
         user_id = input("Enter your Id : ")
-        current_user_from_db = list(util.find_id(user_id))
+        current_user_from_db = 0
+        try:
+            current_user_from_db = list(util.find_id(user_id))
+            if len(current_user_from_db) == 0:
+                print("No such user found, try again...")
+                return
+            stored_pass = current_user_from_db[0][8]
+            if Auth.validate_pass(stored_pass) == False:
+                return
+            user_type = util.get_user_type(user_id)[0][0]
+            if user_type != 1:
+                if util.check_is_user_approved(user_id)[0][0] == 0 or False:
+                    print("You are not yet approved, please wait until approval")
+                    return
 
-        if len(current_user_from_db) == 0:
-            print("No such user fouund, try again...")
-            return
-        stored_pass = current_user_from_db[0][8]
-        if Auth.validate_pass(stored_pass) == False:
-            return
+            print(f"Welcome {current_user_from_db[0][1]}")
 
-        print(f"Welcome {current_user_from_db[0][1]}")
+            available_operations = cf.roles[user_type]
+            user_choice = options.get_choice(available_operations)
+            print(user_choice)
+            cf.role_function_mapping[user_choice]()
+        except:
+            print("Invalid command, try again....")
+            Auth.login()
 
-        user_type = util.get_user_type(user_id)[0][0]
-        available_operations = cf.roles[user_type]
-        user_choice = options.get_choice(available_operations)
-        print(user_choice)
-        cf.role_function_mapping[user_choice]()
 
     def validate_pass(stored_pass):
         input_password = maskpass.advpass().encode('utf-8')

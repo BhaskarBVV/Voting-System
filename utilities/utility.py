@@ -22,11 +22,11 @@ class util:
         connection.close()
 
     def find_id(id):
-        sql_command='select * from user where UserId={}'.format(str(id))
+        sql_command='select * from User where user_id={}'.format(str(id))
         return util.fetch_data(sql_command)
         
-    def get_number_of_records():
-        sql_command="select count(*) from user;"
+    def get_number_of_records(table_name):
+        sql_command=f'select count(*) from {table_name};'
         return util.fetch_data(sql_command)
     
     def add_new_record(user_record):
@@ -35,9 +35,16 @@ class util:
         util.write_data(sql_command)
         sql_command=f'insert into project2.Role values({user_record[0]},{0});'
         util.write_data(sql_command)
+        sql_command=f'insert into project2.Approval values({user_record[0]},{0});'
+        util.write_data(sql_command)
         return True
 
     def get_user_type(id):
-        sql_command=f'select RoleId from Role where UserId="{id}"'
+        sql_command=f'select role_id from Role where user_id="{id}"'
         return util.fetch_data(sql_command)
         
+    def check_is_user_approved(id):
+        sql_command=f'select is_approved from Approval where user_id={id}'
+        return util.fetch_data(sql_command)
+
+    

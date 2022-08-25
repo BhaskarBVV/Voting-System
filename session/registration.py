@@ -18,7 +18,7 @@ class Register:
         password=maskpass.advpass().encode('utf-8')
         password=str(bcrypt.hashpw(password, bcrypt.gensalt()).decode())
         
-        number_of_records=utility.util.get_number_of_records()[0][0]
+        number_of_records=utility.util.get_number_of_records("User")[0][0]
         new_user_id = number_of_records + 1
         # print(type(number_of_records))
         is_addition_successful=utility.util.add_new_record([new_user_id, name, fathers_name, 

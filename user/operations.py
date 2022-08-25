@@ -1,3 +1,4 @@
+from utilities.utility import util as util
 class AllOperation:
     
     def check_on_going_elections():
@@ -9,8 +10,11 @@ class AllOperation:
         pass
     
     def add_party():
-        #add party for ongoing elections basically update party table
-        pass
+        party_name=input("Enter the name of the Party : ")
+        party_id=util.get_number_of_records("Party")[0][0]+1
+        print(party_id)
+        sql_command=f'insert into Party values({party_id},"{party_name}")'
+        util.write_data(sql_command)
     
     def is_approved():
         #check if elections are ongoing tha approve 

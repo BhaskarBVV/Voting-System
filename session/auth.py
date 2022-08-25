@@ -24,16 +24,15 @@ class Auth:
                 if util.check_is_user_approved(user_id)[0][0] == 0 or False:
                     print("You are not yet approved, please wait until approval")
                     return
-
-            print(f"Welcome {current_user_from_db[0][1]}")
-
-            available_operations = cf.roles[user_type]
-            user_choice = options.get_choice(available_operations)
-            print(user_choice)
-            cf.role_function_mapping[user_choice]()
         except:
             print("Invalid command, try again....")
             Auth.login()
+            
+        print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n")
+        available_operations = cf.roles[user_type]
+        user_choice = options.get_choice(available_operations)
+        # print(user_choice)
+        cf.role_function_mapping[user_choice]()
 
 
     def validate_pass(stored_pass):

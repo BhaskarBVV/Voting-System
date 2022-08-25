@@ -12,9 +12,9 @@ class AllOperation:
     def add_party():
         party_name=input("Enter the name of the Party : ")
         party_id=util.get_number_of_records("Party")[0][0]+1
-        print(party_id)
         sql_command=f'insert into Party values({party_id},"{party_name}")'
         util.write_data(sql_command)
+        print(f"Successfully added the party '{party_name}', and party_id is '{party_id}'")
     
     def is_approved():
         #check if elections are ongoing tha approve 
@@ -27,7 +27,6 @@ class AllOperation:
     
     def close_elections():
         # close elections and count votes
-        print("I am working")
         pass
         
     def results():
@@ -48,3 +47,6 @@ class AllOperation:
     def become_admin():
         #Request to become admin
         pass
+    def log_out():
+        print("Logged out successfully..!")
+        return

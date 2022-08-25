@@ -19,8 +19,8 @@ class Auth:
         if Auth.validate_pass(stored_pass) == False:
             return
 
-        
-        print(f"Hello {current_user_from_db[0][1]}")
+        print(f"Welcome {current_user_from_db[0][1]}")
+
         user_type = util.get_user_type(user_id)[0][0]
         available_operations = cf.roles[user_type]
         user_choice = options.get_choice(available_operations)

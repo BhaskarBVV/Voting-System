@@ -32,7 +32,7 @@ foreign key (user_id) references user(user_id)
 
 create table if not exists Party (
  party_id int not null primary key,
- party_name varchar(50) not null
+ party_name varchar(50) not null unique
 );
 
 create table if not exists Result(

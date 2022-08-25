@@ -14,7 +14,8 @@ class AllOperation:
         party_id=util.get_number_of_records("Party")[0][0]+1
         sql_command=f'insert into Party values({party_id},"{party_name}")'
         util.write_data(sql_command)
-        print(f"Successfully added the party '{party_name}', and party_id is '{party_id}'")
+        print(f"\n---Successfully added the party '{party_name}', and party_id is '{party_id}'---\n")
+        return True
     
     def is_approved():
         #check if elections are ongoing tha approve 
@@ -49,4 +50,4 @@ class AllOperation:
         pass
     def log_out():
         print("Logged out successfully..!")
-        return
+        return False

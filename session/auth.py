@@ -31,7 +31,6 @@ class Auth:
         print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n")
         available_operations = cf.roles[user_type]
         user_choice = options.get_choice(available_operations)
-        # print(user_choice)
         cf.role_function_mapping[user_choice]()
 
 

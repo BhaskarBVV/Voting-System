@@ -1,7 +1,4 @@
 class AllOperation:
-    # def __init__():
-    #     # call database and specially user table 
-    #     pass
     
     def check_on_going_elections():
         #if yes than only add user or allow user to login or register
@@ -26,6 +23,7 @@ class AllOperation:
     
     def close_elections():
         # close elections and count votes
+        print("I am working")
         pass
         
     def results():

@@ -13,4 +13,4 @@ class options:
             self.get_choice(available_op)
         else:
             return available_op[choice]
-        #available_op[choice] will return the function keyword
+        

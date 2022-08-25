@@ -20,8 +20,5 @@ class Main:
 
         
 
-
-
-
 while True:
     Main.entry_loop()

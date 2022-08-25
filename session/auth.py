@@ -57,3 +57,4 @@ class Auth:
         if result[0] == True:
             print(f'''Successfully regiistered\n
             Your UserId is : {result[1]}, please remember it !!''')
+        return True

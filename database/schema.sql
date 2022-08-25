@@ -42,3 +42,8 @@ votes int not null,
 primary key(party_id,election_year),
 foreign key (party_id) references Party(party_id)
 );
+
+create table if not exists Election_Year (
+ year int not null primary key,
+ status int not null
+); 

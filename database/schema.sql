@@ -4,8 +4,8 @@ create table if not exists User (
  father_Name Varchar (50) not null,
  aadhaar_number bigint not null unique,
  age int not null,
- contact bigint not null unique,
- email varchar (50) not null unique,
+ contact bigint not null,
+ email varchar (50) not null,
  city varchar (20) not null,
  passwd varchar (100) not null,
  gender varchar(7) not null

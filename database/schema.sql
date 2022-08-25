@@ -7,7 +7,7 @@ create table if not exists User (
  contact bigint not null unique,
  email varchar (50) not null unique,
  city varchar (20) not null,
- passwd varchar (40) not null,
+ passwd varchar (100) not null,
  gender varchar(7) not null
 );
 

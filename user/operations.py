@@ -107,7 +107,11 @@ class AllOperation:
 
     def is_approved(admin_id):
         user_id = AllOperation.get_user_id()
-        if util.check_is_user_approved(user_id)[0][0] == 0 or False:
+        result= util.check_is_user_approved(user_id)
+        if len(result)==0:
+            print("\n---No such user exists.....!!\n")
+            return True
+        elif result[0][0]==0 or False:
             print("\n---Oops, you are not yet approved..!---\n")
         else:
             print("\n---Great, you are approved---\n")
@@ -115,7 +119,11 @@ class AllOperation:
 
     def make_admin(admin_id):
         user_id = AllOperation.get_user_id()
-        if util.get_user_type(user_id)[0][0] == 1:
+        result=util.get_user_type(user_id)
+        if len(result)==0:
+            print("\n---No such user exists.....!!\n")
+            return True
+        elif result[0][0] == 1:
             print("\n---Already an Admin---\n")
             return True
         sql_command = 'select dob from User where user_id={}'.format(str(user_id))
@@ -150,11 +158,11 @@ class AllOperation:
 
     def edit_details(user_id):
         print("\n--- You can edit only following options---\n")
-        available_op=["name","Fathers name","age","contact","email","city","gender"]
+        available_op=["name","Fathers name","dob","contact","email","city","gender"]
         choice=user_choice.options.get_choice(available_op)
         new_data=""
-        if choice == "age":
-            new_data=validate.Validate.validate_input("age",2)
+        if choice == "dob":
+            new_data=validate.Validate.validate_dob()
         elif choice=="contact":
             new_data=validate.Validate.validate_input("contact",10)
         elif choice=="email":
@@ -203,10 +211,11 @@ class AllOperation:
         
 
     def approve_user_login(admin_id):
-        sql_command=f"select u.user_id, u.age, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0"
+        sql_command=f"select u.user_id, u.dob, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0"
         result=util.fetch_data(sql_command)
         for user in result:
-            if user[1]>=18:
+            user_age=int(validate.Validate.get_age(user[1]))
+            if user_age>=18:
                 sql_command=f'update Approval set is_approved={1} where user_id={user[0]}'
                 util.write_data(sql_command)
         print("\n----All valid users have been approved----\n")

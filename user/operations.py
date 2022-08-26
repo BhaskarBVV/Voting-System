@@ -5,6 +5,7 @@ import datetime
 import validations.validation as validate
 import datetime
 import configuration.config as config
+from tabulate import tabulate
 
 
 class AllOperation:
@@ -266,19 +267,21 @@ class AllOperation:
     def show_all_users(admin_id):
         sql_command = "select * from User"
         result = util.fetch_data(sql_command)
-        print("\n-----------------Showing all Records-----------------")
+        print("\n--------------------------------------Showing all Records--------------------------------------")
+        all_users=[]
         for record in result:
-            print(f'''
-            Name : {record[1]}
-            Aadhar Number : {record[3]}
-            Fathers Name : {record[2]}
-            Age : {record[4]}
-            Contact : {record[5]}
-            Email : {record[6]}
-            City : {record[7]}
-            Gender : {record[9]}
-            ''')
-            print("\n-----------------------------------------------------")
+            temp=[]
+            temp.append(record[1])
+            temp.append(record[3])
+            temp.append(record[2])
+            temp.append(record[4])
+            temp.append(record[5])
+            temp.append(record[6])
+            temp.append(record[7])
+            temp.append(record[9])
+            all_users.append(temp)
+        print(tabulate(all_users, headers=["Name", "Aadhar card", "Fathers Name","Age","Contact","Email","City","Gender"]))
+        print("\n-----------------------------------------------------------------------------------------------")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------

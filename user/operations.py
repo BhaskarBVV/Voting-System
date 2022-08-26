@@ -271,16 +271,10 @@ class AllOperation:
         all_users=[]
         for record in result:
             temp=[]
-            temp.append(record[1])
-            temp.append(record[3])
-            temp.append(record[2])
-            temp.append(record[4])
-            temp.append(record[5])
-            temp.append(record[6])
-            temp.append(record[7])
-            temp.append(record[9])
+            for i in record:
+                temp.append(i)
             all_users.append(temp)
-        print(tabulate(all_users, headers=["Name", "Aadhar card", "Fathers Name","Age","Contact","Email","City","Gender"]))
+        print(tabulate(all_users, headers=["Name",  "Fathers Name","Aadhar card","DoB","Contact","Email","City","Gender"]))
         print("\n-----------------------------------------------------------------------------------------------")
         return True
 

@@ -22,11 +22,13 @@ role_function_mapping = {
 }
 
 user_fields = {
-    1: "name",
-    2: "father_Name",
-    3: "age",
-    4: "contact",
-    5: "email",
-    6: "city",
-    7: "gender"
+    "Name": "name",
+    "Fathers Name": "father_Name",
+    "Dob": "dob",
+    "Contact": "contact",
+    "Email": "email",
+    "City": "city",
+    "Gender": "gender"
 }
+
+                        

@@ -25,8 +25,12 @@ class Register:
 
         number_of_records = utility.util.get_number_of_records("User")[0][0]
         new_user_id = number_of_records + 1
-        is_addition_successful = utility.util.add_new_record([new_user_id, name, fathers_name,
+        try:
+            is_addition_successful = utility.util.add_new_record([new_user_id, name, fathers_name,
                                                               aadhar_number, age, contact, email, city, password, gender])
+        except:
+            print("\n----Aadhar number already exists, enter correct Aadhar card number...\n")
+            return[False,-1]
         return [is_addition_successful, new_user_id]
 
     def validate_input(val, digits):

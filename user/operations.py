@@ -200,7 +200,6 @@ class AllOperation:
         
 
     def approve_user_login():
-        all_unapproved_records=[]
         sql_command=f"select u.user_id, u.age, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0"
         result=util.fetch_data(sql_command)
         for user in result:

@@ -271,10 +271,11 @@ class AllOperation:
         all_users=[]
         for record in result:
             temp=[]
-            for i in record:
-                temp.append(i)
+            for idx,i in enumerate(record,0):
+                if idx!=8:
+                    temp.append(i)
             all_users.append(temp)
-        print(tabulate(all_users, headers=["Name",  "Fathers Name","Aadhar card","DoB","Contact","Email","City","Gender"]))
+        print(tabulate(all_users, headers=["S.No.","Name",  "Fathers Name","Aadhar card","DoB","Contact","Email","City","Gender"]))
         print("\n-----------------------------------------------------------------------------------------------")
         return True
 

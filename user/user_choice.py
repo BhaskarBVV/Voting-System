@@ -14,6 +14,6 @@ class options:
             print("\nInvalid input, please enter a valid number")
             options.get_choice(available_op)
         else:
-            print(available_op[choice])
+            # print(available_op[choice])
             return available_op[choice]
         

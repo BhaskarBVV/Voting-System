@@ -31,12 +31,12 @@ class Auth:
             print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n")
             is_logged_in=True
             while is_logged_in:
-                is_logged_in=Auth.display_options(user_type)
+                is_logged_in=Auth.display_options(user_type, user_id)
     
-    def display_options(user_type):
+    def display_options(user_type, user_id):
         available_operations = cf.roles[user_type]
         user_choice = options.get_choice(available_operations)
-        return cf.role_function_mapping[user_choice]()
+        return cf.role_function_mapping[user_choice](user_id)
 
     def validate_pass(stored_pass):
         input_password = maskpass.advpass().encode('utf-8')

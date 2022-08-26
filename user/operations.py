@@ -1,13 +1,14 @@
 import session.registration as r
 from utilities.utility import util as util
+import user.user_choice as user_choice
 import datetime
-
+import validations.validation as validate
 
 class AllOperation:
 
     # jab election start honge tab voteRecord table clear kri jayegi, to store votes for current new election
     # jab election end honge tab voteRecord se votes count hoke, result table main update kiye jayenege
-    def check_on_going_elections():
+    def check_on_going_elections(admin_id):
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
         if len(result) == 0:
@@ -19,7 +20,7 @@ class AllOperation:
             print(f"\n---No Elections of {datetime.date.today().year} are over---\n")
         return True
 
-    def start_election():
+    def start_election(admin_id):
         cur_year = datetime.date.today().year
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
@@ -38,7 +39,7 @@ class AllOperation:
         print(f"\n---Elections of {cur_year} have begun---\n")
         return True
 
-    def close_elections():
+    def close_elections(admin_id):
         cur_year = datetime.date.today().year
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
@@ -80,7 +81,7 @@ class AllOperation:
             print(i, end="\n")    
         return True
 
-    def add_party():
+    def add_party(admin_id):
         party_name = input("Enter the name of the Party : ")
         party_id = util.get_number_of_records("Party")[0][0]+1
         sql_command = f'insert into Party values({party_id},"{party_name}")'
@@ -93,42 +94,40 @@ class AllOperation:
                 f"\n---Successfully added the party '{party_name}', and party_id is '{party_id}'---\n")
         return True
 
-    def is_approved():
+    def get_user_id():
         user_id = input("Enter your Id : ")
         try:
             user_id = int(user_id)
         except:
             print("Invalid user Id")
-            return AllOperation.is_approved()
+            return AllOperation.get_user_id()
         else:
-            if util.check_is_user_approved(user_id)[0][0] == 0 or False:
-                print("\n---Oops, you are not yet approved..!---\n")
-            else:
-                print("\n---Great, you are approved---\n")
+            return user_id
+
+    def is_approved(admin_id):
+        user_id = AllOperation.get_user_id()
+        if util.check_is_user_approved(user_id)[0][0] == 0 or False:
+            print("\n---Oops, you are not yet approved..!---\n")
+        else:
+            print("\n---Great, you are approved---\n")
         return True
 
-    def make_admin():
-        user_id = input("Enter your Id : ")
-        try:
-            user_id = int(user_id)
-        except:
-            print("Invalid user Id")
-            return AllOperation.make_admin()
-        else:
-            if util.get_user_type(user_id)[0][0] == 1:
-                print("\n---Already an Admin---\n")
-                return True
-            sql_command = 'select age from User where user_id={}'.format(
+    def make_admin(admin_id):
+        user_id = AllOperation.get_user_id()
+        if util.get_user_type(user_id)[0][0] == 1:
+            print("\n---Already an Admin---\n")
+            return True
+        sql_command = 'select age from User where user_id={}'.format(
+            str(user_id))
+        user_age = util.fetch_data(sql_command)[0][0]
+        if user_age >= 18:
+            sql_command = 'Update Role set role_id=1 where user_id={}'.format(
                 str(user_id))
-            user_age = util.fetch_data(sql_command)[0][0]
-            if user_age >= 18:
-                sql_command = 'Update Role set role_id=1 where user_id={}'.format(
-                    str(user_id))
-                util.write_data(sql_command)
-                print(f"Successfully made {user_id} as Admin")
+            util.write_data(sql_command)
+            print(f"\n----Successfully made {user_id} as Admin----\n")
         return True
 
-    def results():
+    def results(admin_id):
         #will show the result of past elections.
         year=input("\nEnter the Election year whose result is to be displayed : ")
         try:
@@ -148,18 +147,31 @@ class AllOperation:
             print("\n")
         return True
 
-    def edit_details():
-        # If user want to edit details
-        pass
+    def edit_details(user_id):
+        print("\n--- You can edit only following options---\n")
+        available_op=["name","Fathers name","age","contact","email","city","gender"]
+        choice=user_choice.options.get_choice(available_op)
+        new_data=""
+        if choice == "age":
+            new_data=validate.Validate.validate_input("age",2)
+        elif choice=="contact":
+            new_data=validate.Validate.validate_input("contact",10)
+        elif choice=="email":
+            new_data=validate.Validate.validate_email()
+        else:
+            new_data=input(f"Enter your {choice}...:")
+        sql_command=f'update User set {choice}="{new_data}" where user_id={user_id}'
+        util.write_data(sql_command)
+        print("\n----Successfully update your information----\n")
+        return True
 
-    def give_vote():
+    def give_vote(user_id):
         cur_year = datetime.date.today().year
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
         if len(result) == 0:
             print(f'\n---Elections of {cur_year} have not been started yet---\n')
         elif result[0][0] == 1:
-            user_id=AllOperation.get_user_id()
             sql_command=f'select * from VoteRecord where user_id={user_id}'
             has_voted=util.fetch_data(sql_command)
             if len(has_voted)!=0:
@@ -181,17 +193,7 @@ class AllOperation:
             print(f'\n---Elections of {cur_year} have already been closed---\n')
         return True
 
-    def get_user_id():
-        user_id = input("Enter your Id : ")
-        try:
-            user_id = int(user_id)
-        except:
-            print("Invalid user Id")
-            return AllOperation.get_user_id()
-        else:
-            return user_id
-
-    def register_new_user():
+    def register_new_user(admin_id):
         result =r.Register.reg_new_user()
         if result[0] == True:
             print(f'''Successfully regiistered\n
@@ -199,7 +201,7 @@ class AllOperation:
         return True
         
 
-    def approve_user_login():
+    def approve_user_login(admin_id):
         sql_command=f"select u.user_id, u.age, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0"
         result=util.fetch_data(sql_command)
         for user in result:
@@ -210,7 +212,7 @@ class AllOperation:
         # for i in result:
         return True
 
-    def show_all_users():
+    def show_all_users(admin_id):
         sql_command="select * from User"
         result=util.fetch_data(sql_command)
         print("\n-----------------Showing all Records-----------------")
@@ -228,6 +230,6 @@ class AllOperation:
             print("\n-----------------------------------------------------")
         return True
 
-    def log_out():
+    def log_out(id):
         print("Logged out successfully..!")
         return False

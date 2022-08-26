@@ -6,6 +6,10 @@ class options:
         choice=input("Enter your choice : ")
         try:
             choice=int(choice)
+            if not choice in range(len(available_op)):
+                print("\n---Opps, its an Invalid Choice, try again...\n")
+                return options.get_choice(available_op)
+
         except:
             print("\nInvalid input, please enter a valid number")
             options.get_choice(available_op)

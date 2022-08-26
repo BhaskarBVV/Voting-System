@@ -14,11 +14,9 @@ class AllOperation:
             print(
                 f"\n---Elections of {datetime.date.today().year} are not yet started---\n")
         elif result[0][0] == 1:
-            print(
-                f"\n---Yes Elections of {datetime.date.today().year} are going on---\n")
+            print(f"\n---Yes Elections of {datetime.date.today().year} are going on---\n")
         else:
-            print(
-                f"\n---No Elections of {datetime.date.today().year} are over---\n")
+            print(f"\n---No Elections of {datetime.date.today().year} are over---\n")
         return True
 
     def start_election():
@@ -26,9 +24,13 @@ class AllOperation:
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
         if len(result) != 0:
-            print(
-                f'\n---Elections of {cur_year} have already been started---\n')
-            return True
+            if result[0][0] == 2:
+                print(f"\n---Elections of {cur_year} are over---\n")
+                return True
+            else:
+                print(f'\n---Elections of {cur_year} have already been started---\n')
+                return True
+    
         sql_command = f'insert into Election_Year values({cur_year},{1})'
         util.write_data(sql_command)
         sql_command = f'delete from VoteRecord where user_id!=-1'
@@ -127,7 +129,24 @@ class AllOperation:
         return True
 
     def results():
-        pass
+        #will show the result of past elections.
+        year=input("\nEnter the Election year whose result is to be displayed : ")
+        try:
+            year=int(year)
+        except:
+            print("\n---Opps, Invalid year, try again---\n")
+            AllOperation.results()
+        else:
+            sql_command=f"select P.party_name, R.votes from Result R, Party P where election_year={year} and P.party_id=R.party_id";
+            result=util.fetch_data(sql_command)
+            if len(result)==0:
+                print(f"\n---No record found for year {year}---\n")
+                return True
+            print("\n---Showing Party names and their votes---")
+            for i in result:
+                print(i[0], i[1])
+            print("\n")
+        return True
 
     def edit_details():
         # If user want to edit details

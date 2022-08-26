@@ -14,12 +14,12 @@ class Auth:
         try:
             current_user_from_db = list(util.find_id(user_id))
         except:
-            print("Invalid command, try again....")
+            print("Invalid user, try again....")
             Auth.login()
         else:
             if len(current_user_from_db) == 0:
                 print("No such user found, try again...")
-                return
+                return Auth.login()
             stored_pass = current_user_from_db[0][8]
             if Auth.validate_pass(stored_pass) == False:
                 return

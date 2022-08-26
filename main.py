@@ -1,4 +1,5 @@
 import session.auth as begin_session
+import pyfiglet
 class Main:
 
     def entry_loop():
@@ -13,12 +14,12 @@ class Main:
         elif entry_choice.isdigit() and  int(entry_choice) == 2:
             begin_session.Auth.login()
         elif entry_choice.isdigit() and  int(entry_choice) == 0:
-            print("\n=================** THANK YOU FOR VISITING**===================\n")
+            print(pyfiglet.figlet_format("THANKS \nFOR VISITING"))
             exit()
         else:
             print("Invalid choice, try again...")
 
         
-
+print(pyfiglet.figlet_format("V o t i n g   \nS y s t e m"))
 while True:
     Main.entry_loop()

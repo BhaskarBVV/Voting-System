@@ -200,7 +200,16 @@ class AllOperation:
         
 
     def approve_user_login():
-        pass
+        all_unapproved_records=[]
+        sql_command=f"select u.user_id, u.age, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0"
+        result=util.fetch_data(sql_command)
+        for user in result:
+            if user[1]>=18:
+                sql_command=f'update Approval set is_approved={1} where user_id={user[0]}'
+                util.write_data(sql_command)
+        print("\n----All valid users have been approved----\n")
+        # for i in result:
+        return True
 
     def show_all_users():
         sql_command="select * from User"

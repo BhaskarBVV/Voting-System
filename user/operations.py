@@ -3,6 +3,7 @@ from utilities.utility import util as util
 import user.user_choice as user_choice
 import datetime
 import validations.validation as validate
+import datetime
 
 class AllOperation:
 
@@ -117,9 +118,9 @@ class AllOperation:
         if util.get_user_type(user_id)[0][0] == 1:
             print("\n---Already an Admin---\n")
             return True
-        sql_command = 'select age from User where user_id={}'.format(
-            str(user_id))
-        user_age = util.fetch_data(sql_command)[0][0]
+        sql_command = 'select dob from User where user_id={}'.format(str(user_id))
+        dob = util.fetch_data(sql_command)[0][0]
+        user_age=int(validate.Validate.get_age(dob))
         if user_age >= 18:
             sql_command = 'Update Role set role_id=1 where user_id={}'.format(
                 str(user_id))
@@ -233,3 +234,4 @@ class AllOperation:
     def log_out(id):
         print("Logged out successfully..!")
         return False
+

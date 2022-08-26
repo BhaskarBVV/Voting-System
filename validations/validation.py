@@ -1,5 +1,5 @@
 import math
-# from configuration.config import input_line as il
+import datetime
 import re
 il = "Enter your {}....:" 
 class Validate:
@@ -25,3 +25,25 @@ class Validate:
             return Validate.validate_email()
         else:
             return email
+        
+    def validate_dob():
+        format = "%Y-%m-%d"
+        date=input("Enter DOB (YYYY-MM-DD) ...:")
+        try:
+            bool(datetime.datetime.strptime(date, format))
+        except ValueError:
+            print("Invalid date, please enter a valid date...!!")
+            return Validate.validate_dob()
+        else:
+            return date
+
+    def get_age(dob):
+        today = datetime.datetime.today()
+        dob=str(dob)
+        dob = datetime.datetime.strptime(dob, '%Y-%m-%d')
+        age=str((today-dob)/365).split(" ")[0]
+        return age
+
+
+
+

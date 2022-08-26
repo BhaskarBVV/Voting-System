@@ -12,9 +12,9 @@ class Register:
 
         name = input(il.format("Name"))
         fathers_name = input(il.format("Father's Name"))
-
+        
         aadhar_number = validate.Validate.validate_input("Aadhaar Card", 12)
-        age = validate.Validate.validate_input("Age", 2)
+        dob = validate.Validate.validate_dob()
         contact = validate.Validate.validate_input("Phone number", 10)
         email = validate.Validate.validate_email()
         city = input(il.format("City"))
@@ -27,10 +27,11 @@ class Register:
         new_user_id = number_of_records + 1
         try:
             is_addition_successful = utility.util.add_new_record([new_user_id, name, fathers_name,
-                                                              aadhar_number, age, contact, email, city, password, gender])
+                                                              aadhar_number, dob, contact, email, city, password, gender])
         except:
             print("\n----Aadhar number already exists, enter correct Aadhar card number...\n")
             return[False,-1]
+        
         return [is_addition_successful, new_user_id]
 
     

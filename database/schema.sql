@@ -3,7 +3,7 @@ create table if not exists User (
  name Varchar (50) not null,
  father_Name Varchar (50) not null,
  aadhaar_number bigint not null unique,
- age int not null,
+ dob date not null,
  contact bigint not null,
  email varchar (50) not null,
  city varchar (20) not null,

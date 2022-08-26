@@ -2,7 +2,7 @@ import user.operations as op
 input_line="Enter your {}....:"
 roles={
     0:["Edit details","Give vote","Check on going Elections","Log out"], #user
-    1:["Check on going Elections","Start Elections","Add Party","Register user","Approve the user for login","Check if user is approved","Make admin","Close Elections","Results","Log out"]  #admin
+    1:["Check on going Elections","Start Elections","Add Party","Register user","Approve the user for login","Show all Users","Check if user is approved","Make admin","Close Elections","Election Results","Log out"]  #admin
 
 }
 role_function_mapping={
@@ -14,8 +14,9 @@ role_function_mapping={
     "Check if user is approved":op.AllOperation.is_approved,
     "Make admin":op.AllOperation.make_admin,
     "Close Elections":op.AllOperation.close_elections,
-    "Results":op.AllOperation.results,
+    "Election Results":op.AllOperation.results,
     "Log out":op.AllOperation.log_out,
     "Register user":op.AllOperation.register_new_user,
-    "Approve the user for login":op.AllOperation.approve_user_login
+    "Approve the user for login":op.AllOperation.approve_user_login,
+    "Show all Users":op.AllOperation.show_all_users
 }

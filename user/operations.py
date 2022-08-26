@@ -1,4 +1,4 @@
-import re
+import session.registration as r
 from utilities.utility import util as util
 import datetime
 
@@ -192,12 +192,33 @@ class AllOperation:
             return user_id
 
     def register_new_user():
-        # Register.reg_new_user()
-        # return True
-        pass
+        result =r.Register.reg_new_user()
+        if result[0] == True:
+            print(f'''Successfully regiistered\n
+            Your UserId is : {result[1]}, please remember it !!\n''')
+        return True
+        
 
     def approve_user_login():
         pass
+
+    def show_all_users():
+        sql_command="select * from User"
+        result=util.fetch_data(sql_command)
+        print("\n-----------------Showing all Records-----------------")
+        for record in result:
+            print(f'''
+            Name : {record[1]}
+            Aadhar Number : {record[3]}
+            Fathers Name : {record[2]}
+            Age : {record[4]}
+            Contact : {record[5]}
+            Email : {record[6]}
+            City : {record[7]}
+            Gender : {record[9]}
+            ''')
+            print("\n-----------------------------------------------------")
+        return True
 
     def log_out():
         print("Logged out successfully..!")

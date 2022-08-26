@@ -196,6 +196,8 @@ class AllOperation:
             new_data = validate.Validate.validate_input("contact", 10)
         elif choice == "email":
             new_data = validate.Validate.validate_email()
+        elif choice=="gender":
+            new_data=validate.Validate.validate_gen()
         else:
             new_data = input(f"Enter your {choice}...:")
         sql_command = f'update User set {choice}="{new_data}" where user_id={user_id}'

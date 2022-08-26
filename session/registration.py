@@ -18,7 +18,7 @@ class Register:
         contact = validate.Validate.validate_input("Phone number", 10)
         email = validate.Validate.validate_email()
         city = input(il.format("City"))
-        gender = input(il.format("Gender M/F"))
+        gender = validate.Validate.validate_gen()
 
         password = maskpass.advpass().encode('utf-8')
         password = str(bcrypt.hashpw(password, bcrypt.gensalt()).decode())

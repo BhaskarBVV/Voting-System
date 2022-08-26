@@ -1,6 +1,7 @@
 import math
 import datetime
 import re
+from wsgiref import validate
 il = "Enter your {}....:" 
 class Validate:
 
@@ -36,7 +37,14 @@ class Validate:
             return Validate.validate_dob()
         else:
             return date
-
+    def validate_gen():
+        gen=input(il.format("Gender M/F"))
+        if gen not in ["M","F"]:
+            print("Please enter a valid input (M/F)...:")
+            return Validate.validate_gen()
+        else:
+            return gen
+        
     def get_age(dob):
         today = datetime.datetime.today()
         dob=str(dob)

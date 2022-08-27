@@ -5,15 +5,28 @@ import bcrypt
 import utilities.utility as utility
 import re
 import validations.validation as validate
+from  colprint.colprint import newprint as col
 
 class Register:
 
     def reg_new_user():
-
+        
+        all_aadhar=[]
+        sql_command=f'select aadhaar_number from User'
+        result=utility.util.fetch_data(sql_command)
+        for i in result:
+            all_aadhar.append(i[0])
+            
         name = input(il.format("Name"))
         fathers_name = input(il.format("Father's Name"))
-        
-        aadhar_number = validate.Validate.validate_input("Aadhaar Card", 12)
+        aadhar_exists=True
+        while aadhar_exists:
+            aadhar_number = validate.Validate.validate_input("Aadhaar Card", 12)
+            if aadhar_number not in all_aadhar:
+                aadhar_exists=False
+            else:
+                col.col_print("\n---Aadhar already Exists---\n","red")
+            
         dob = validate.Validate.validate_dob()
         contact = validate.Validate.validate_input("Phone number", 10)
         email = validate.Validate.validate_email()

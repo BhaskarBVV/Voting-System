@@ -1,10 +1,10 @@
 import session.registration as registration
 import bcrypt
 import maskpass
-from utilities.utility import util
+from utilities.utility import Util
 import configuration.config as cf
-from  colprint.colprint import newprint as col
-from user.user_choice import options
+from  colprint.colprint import NewPrint as col
+from user.user_choice import Options
 
 
 class Auth:
@@ -13,7 +13,7 @@ class Auth:
         user_id = input("Enter your Id : ")
         current_user_from_db = 0
         try:
-            current_user_from_db = list(util.find_id(user_id))
+            current_user_from_db = list(Util.find_id(user_id))
         except:
             col.col_print("Invalid user, try again....","red")
             
@@ -25,9 +25,9 @@ class Auth:
             stored_pass = current_user_from_db[0][8]
             if Auth.validate_pass(stored_pass) == False:
                 return
-            user_type = util.get_user_type(user_id)[0][0]
+            user_type = Util.get_user_type(user_id)[0][0]
             if user_type != 1:
-                if util.check_is_user_approved(user_id)[0][0] == 0 or False:
+                if Util.check_is_user_approved(user_id)[0][0] == 0 or False:
                     col.col_print("You are not yet approved, please wait until approval","red")
                     return
             col.col_print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n","Yellow")
@@ -37,7 +37,7 @@ class Auth:
     
     def display_options(user_type, user_id):
         available_operations = cf.roles[user_type]
-        user_choice = options.get_choice(available_operations)
+        user_choice = Options.get_choice(available_operations)
         return cf.role_function_mapping[user_choice](user_id)
 
     def validate_pass(stored_pass):

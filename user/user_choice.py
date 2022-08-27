@@ -1,6 +1,6 @@
 from tabulate import tabulate
 import fontstyle
-class options:
+class Options:
 
     def col(text,col):
         return fontstyle.apply(text,col)
@@ -12,12 +12,12 @@ class options:
         try:
             choice=int(choice)
             if not choice in range(len(available_op)):
-                print(options.col("\n---Opps, its an Invalid Choice, try again...\n", 'Red'))
-                return options.get_choice(available_op)
+                print(Options.col("\n---Opps, its an Invalid Choice, try again...\n", 'Red'))
+                return Options.get_choice(available_op)
 
         except:
-            print(options.col("\n---Opps, its an Invalid Choice, try again...\n", 'Red'))
-            return options.get_choice(available_op)
+            print(Options.col("\n---Opps, its an Invalid Choice, try again...\n", 'Red'))
+            return Options.get_choice(available_op)
         else:
             return available_op[choice]
     

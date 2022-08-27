@@ -1,7 +1,7 @@
 import math
 import datetime
 import re
-from  colprint.colprint import newprint as col
+from  colprint.colprint import NewPrint as col
 
 il = "Enter your {}....:" 
 class Validate:

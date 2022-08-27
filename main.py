@@ -1,7 +1,7 @@
 from session.auth import Auth
 import pyfiglet
 from configuration.config import main_menu, dashboard, Invalid
-from  colprint.colprint import newprint as col
+from  colprint.colprint import NewPrint as col
 from tabulate import tabulate
 class Main:
 

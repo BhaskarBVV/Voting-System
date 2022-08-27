@@ -1,11 +1,9 @@
 import maskpass
-import math
 from configuration.config import input_line as il
 import bcrypt
 import utilities.utility as utility
-import re
 import validations.validation as validate
-from  colprint.colprint import newprint as col
+from  colprint.colprint import NewPrint as col
 
 class Register:
 
@@ -13,7 +11,7 @@ class Register:
         
         all_aadhar=[]
         sql_command=f'select aadhaar_number from User'
-        result=utility.util.fetch_data(sql_command)
+        result=utility.Util.fetch_data(sql_command)
         for i in result:
             all_aadhar.append(i[0])
             
@@ -36,10 +34,10 @@ class Register:
         password = maskpass.advpass().encode('utf-8')
         password = str(bcrypt.hashpw(password, bcrypt.gensalt()).decode())
 
-        number_of_records = utility.util.get_number_of_records("User")[0][0]
+        number_of_records = utility.Util.get_number_of_records("User")[0][0]
         new_user_id = number_of_records + 1
         try:
-            is_addition_successful = utility.util.add_new_record([new_user_id, name, fathers_name,
+            is_addition_successful = utility.Util.add_new_record([new_user_id, name, fathers_name,
                                                               aadhar_number, dob, contact, email, city, password, gender])
         except:
             print("\n----Aadhar number already exists, enter correct Aadhar card number...\n")

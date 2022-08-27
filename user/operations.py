@@ -167,7 +167,7 @@ class AllOperation:
             year = int(year)
         except:
             col.col_print("\n---Opps, Invalid year, try again---\n","red")
-            AllOperation.results()
+            AllOperation.results(admin_id)
         else:
             sql_command = f"select P.party_name, R.votes from Result R, Party P where election_year={year} and P.party_id=R.party_id"
             result = util.fetch_data(sql_command)

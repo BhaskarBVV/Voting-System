@@ -15,14 +15,14 @@ class AllOperation:
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
         if len(result) == 0:
-            print(
-                f"\n---Elections of {datetime.date.today().year} are not yet started---\n")
+            col.col_print(
+                f"\n---Elections of {datetime.date.today().year} are not yet started---\n","red")
         elif result[0][0] == 1:
-            print(
-                f"\n---Yes Elections of {datetime.date.today().year} are going on---\n")
+            col.col_print(
+                f"\n---Yes Elections of {datetime.date.today().year} are going on---\n","green")
         else:
-            print(
-                f"\n---No Elections of {datetime.date.today().year} are over---\n")
+            col.col_print(
+                f"\n---No Elections of {datetime.date.today().year} are over---\n","red")
         return True
 
 # -------------------------------------------------------------------------------------------------------------------------------------
@@ -33,18 +33,18 @@ class AllOperation:
         result = util.fetch_data(sql_command)
         if len(result) != 0:
             if result[0][0] == 2:
-                print(f"\n---Elections of {cur_year} are over---\n")
+                col.col_print(f"\n---Elections of {cur_year} are over---\n","red")
                 return True
             else:
-                print(
-                    f'\n---Elections of {cur_year} have already been started---\n')
+                col.col_print(
+                    f'\n---Elections of {cur_year} have already been started---\n',"red")
                 return True
 
         sql_command = f'insert into Election_Year values({cur_year},{1})'
         util.write_data(sql_command)
         sql_command = f'delete from VoteRecord where user_id!=-1'
         util.write_data(sql_command)
-        print(f"\n---Elections of {cur_year} have begun---\n")
+        col.col_print(f"\n---Elections of {cur_year} have begun---\n","green")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -55,16 +55,16 @@ class AllOperation:
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
         if len(result) == 0:
-            print(
-                f'\n---Elections of {cur_year} have not been started yet---\n')
+            col.col_print(
+                f'\n---Elections of {cur_year} have not been started yet---\n',"red")
         elif result[0][0] == 1:
             sql_command = f'Update Election_Year set status=2 where year={cur_year}'
             util.write_data(sql_command)
             AllOperation.fetch_and_store_results(cur_year)
-            print(f'\n---Elections of {cur_year} have been closed---\n')
+            col.col_print(f'\n---Elections of {cur_year} have been closed---\n',"green")
         elif result[0][0] == 2:
-            print(
-                f'\n---Elections of {cur_year} have already been closed---\n')
+            col.col_print(
+                f'\n---Elections of {cur_year} have already been closed---\n',"red")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -90,8 +90,8 @@ class AllOperation:
                 max_votes = no_of_votes
             sql_command = f'insert into Result values({cur_party},{year},{no_of_votes})'
             util.write_data(sql_command)
-        print(
-            f"\n---Here's the list of parties with maximum votes : {max_votes}---\n")
+        col.col_print(
+            f"\n---Here's the list of parties with maximum votes : {max_votes}---\n","green")
         for i in winning_parties:
             print(i, end="\n")
         return True
@@ -105,10 +105,10 @@ class AllOperation:
         try:
             util.write_data(sql_command)
         except:
-            print("\n---Party already exists---\n")
+            col.col_print("\n---Party already exists---\n","red")
         else:
-            print(
-                f"\n---Successfully added the party '{party_name}', and party_id is '{party_id}'---\n")
+            col.col_print(
+                f"\n---Successfully added the party '{party_name}'---\n","green")
         return True
 
     def get_user_id():
@@ -116,7 +116,7 @@ class AllOperation:
         try:
             user_id = int(user_id)
         except:
-            print("Invalid user Id")
+            col.col_print("Invalid user Id","red")
             return AllOperation.get_user_id()
         else:
             return user_id
@@ -127,12 +127,12 @@ class AllOperation:
         user_id = AllOperation.get_user_id()
         result = util.check_is_user_approved(user_id)
         if len(result) == 0:
-            print("\n---No such user exists.....!!\n")
+            col.col_print("\n---No such user exists.....!!\n","red")
             return True
         elif result[0][0] == 0 or False:
-            print("\n---Oops, you are not yet approved..!---\n")
+            col.col_print("\n---Oops, you are not yet approved..!---\n","red")
         else:
-            print("\n---Great, you are approved---\n")
+            col.col_print("\n---Great, you are approved---\n","green")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -141,10 +141,10 @@ class AllOperation:
         user_id = AllOperation.get_user_id()
         result = util.get_user_type(user_id)
         if len(result) == 0:
-            print("\n---No such user exists.....!!\n")
+            col.col_print("\n---No such user exists.....!!\n","red")
             return True
         elif result[0][0] == 1:
-            print("\n---Already an Admin---\n")
+            col.col_print("\n---Already an Admin---\n","green")
             return True
         sql_command = 'select dob from User where user_id={}'.format(
             str(user_id))
@@ -154,7 +154,7 @@ class AllOperation:
             sql_command = 'Update Role set role_id=1 where user_id={}'.format(
                 str(user_id))
             util.write_data(sql_command)
-            print(f"\n----Successfully made {user_id} as Admin----\n")
+            col.col_print(f"\n----Successfully made {user_id} as Admin----\n","green")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -166,15 +166,15 @@ class AllOperation:
         try:
             year = int(year)
         except:
-            print("\n---Opps, Invalid year, try again---\n")
+            col.col_print("\n---Opps, Invalid year, try again---\n","red")
             AllOperation.results()
         else:
             sql_command = f"select P.party_name, R.votes from Result R, Party P where election_year={year} and P.party_id=R.party_id"
             result = util.fetch_data(sql_command)
             if len(result) == 0:
-                print(f"\n---No record found for year {year}---\n")
+                col.col_print(f"\n---No record found for year {year}---\n","red")
                 return True
-            print("\n---Showing Party names and their votes---")
+            col.col_print("\n---Showing Party names and their votes---","green")
             for i in result:
                 print(i[0], i[1])
             print("\n")
@@ -183,7 +183,7 @@ class AllOperation:
 #-------------------------------------------------------------------------------------------------------------------------------------
 
     def edit_details(user_id):
-        print("\n--- You can edit only following options---\n")
+        col.col_print("\n--- You can edit only following options---\n","cyan")
         available_op = ["Name", "Fathers Name", "Dob",
                         "Contact", "Email", "City", "Gender"]
         choice = user_choice.options.get_choice(available_op)
@@ -203,7 +203,7 @@ class AllOperation:
         sql_command = f'update User set {choice}="{new_data}" where user_id={user_id}'
         # print(sql_command)
         util.write_data(sql_command)
-        print("\n----Successfully update your information----\n")
+        col.col_print("\n----Successfully update your information----\n","green")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -213,13 +213,13 @@ class AllOperation:
         sql_command = f'select status from Election_Year where year={datetime.date.today().year}'
         result = util.fetch_data(sql_command)
         if len(result) == 0:
-            print(
-                f'\n---Elections of {cur_year} have not been started yet---\n')
+            col.col_print(
+                f'\n---Elections of {cur_year} have not been started yet---\n',"red")
         elif result[0][0] == 1:
             sql_command = f'select * from VoteRecord where user_id={user_id}'
             has_voted = util.fetch_data(sql_command)
             if len(has_voted) != 0:
-                print("\n---You have already voted !---\n")
+                col.col_print("\n---You have already voted !---\n","green")
                 return True
             sql_command = "select * from Party"
             all_parties = util.fetch_data(sql_command)
@@ -229,13 +229,13 @@ class AllOperation:
                 print(party_id, " ", party_name)
             voter_choice = input("Enter the party of your choice : ")
             while not (voter_choice.isdigit() and int(voter_choice) >= 1 and int(voter_choice) <= len(all_parties)):
-                print("Invalid party Id, try again")
+                col.col_print("Invalid party Id, try again","red")
                 voter_choice = input("Enter the party of your choice : ")
             sql_command = f'insert into VoteRecord values({user_id},{1},{voter_choice})'
             util.write_data(sql_command)
         elif result[0][0] == 2:
-            print(
-                f'\n---Elections of {cur_year} have already been closed---\n')
+            col.col_print(
+                f'\n---Elections of {cur_year} have already been closed---\n',"red")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -243,8 +243,8 @@ class AllOperation:
     def register_new_user(admin_id):
         result = r.Register.reg_new_user()
         if result[0] == True:
-            print(f'''Successfully regiistered\n
-            Your UserId is : {result[1]}, please remember it !!\n''')
+            col.col_print(f'''Successfully regiistered\n
+            Your UserId is : {result[1]}, please remember it !!\n''',"green")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -257,7 +257,7 @@ class AllOperation:
             if user_age >= 18:
                 sql_command = f'update Approval set is_approved={1} where user_id={user[0]}'
                 util.write_data(sql_command)
-        print("\n----All valid users have been approved----\n")
+        col.col_print("\n----All valid users have been approved----\n","green")
         # for i in result:
         return True
 
@@ -266,7 +266,7 @@ class AllOperation:
     def show_all_users(admin_id):
         sql_command = "select * from User"
         result = util.fetch_data(sql_command)
-        print("\n--------------------------------------Showing all Records--------------------------------------")
+        col.col_print("\n--------------------------------------Showing all Records--------------------------------------","green")
         all_users=[]
         for record in result:
             temp=[]

@@ -15,11 +15,12 @@ class Auth:
         try:
             current_user_from_db = list(util.find_id(user_id))
         except:
-            print("Invalid user, try again....")
+            col.col_print("Invalid user, try again....","red")
+            
             Auth.login()
         else:
             if len(current_user_from_db) == 0:
-                print("No such user found, try again...")
+                col.col_print("No such user found, try again...","red")
                 return Auth.login()
             stored_pass = current_user_from_db[0][8]
             if Auth.validate_pass(stored_pass) == False:
@@ -27,7 +28,7 @@ class Auth:
             user_type = util.get_user_type(user_id)[0][0]
             if user_type != 1:
                 if util.check_is_user_approved(user_id)[0][0] == 0 or False:
-                    print("You are not yet approved, please wait until approval")
+                    col.col_print("You are not yet approved, please wait until approval","red")
                     return
             col.col_print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n","Yellow")
             is_logged_in=True

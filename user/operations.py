@@ -266,7 +266,7 @@ class AllOperation:
     def show_all_users(admin_id):
         sql_command = "select * from User"
         result = Util.fetch_data(sql_command)
-        col.col_print("\n--------------------------------------Showing all Records--------------------------------------","green")
+        col.col_print("\n-------------------------------------------Showing all Records-------------------------------------------","green")
         all_users=[]
         for record in result:
             temp=[]
@@ -275,7 +275,7 @@ class AllOperation:
                     temp.append(i)
             all_users.append(temp)
         print(tabulate(all_users, headers=["S.No.","Name",  "Fathers Name","Aadhar card","DoB","Contact","Email","City","Gender"]))
-        print("\n-----------------------------------------------------------------------------------------------")
+        print("\n---------------------------------------------------------------------------------------------------------")
         return True
 
 #-------------------------------------------------------------------------------------------------------------------------------------

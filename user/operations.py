@@ -3,10 +3,9 @@ from utilities.utility import util as util
 import user.user_choice as user_choice
 import datetime
 import validations.validation as validate
-import datetime
 import configuration.config as config
 from tabulate import tabulate
-
+from  colprint.colprint import newprint as col
 
 class AllOperation:
 
@@ -282,5 +281,5 @@ class AllOperation:
 #-------------------------------------------------------------------------------------------------------------------------------------
 
     def log_out(id):
-        print("Logged out successfully..!")
+        col.col_print("Logged out successfully..!","green")
         return False

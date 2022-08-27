@@ -1,5 +1,8 @@
 import user.operations as op
+
 input_line = "Enter your {}....:"
+dashboard="\n=======================**DASHBOARD**=============================\n"
+Invalid="\n---Opps, its an Invalid Choice, try again...\n"
 roles = {
     0: ["Edit details", "Give vote", "Check on going Elections", "Log out"],  # user
     1: ["Check on going Elections", "Start Elections", "Add Party", "Register user","Edit details","Approve the user for login", "Show all Users", "Check if user is approved", "Make admin", "Close Elections", "Election Results", "Log out"]  # admin
@@ -31,4 +34,5 @@ user_fields = {
     "Gender": "gender"
 }
 
+main_menu=["Exit","Sign Up","Sign In"]
                         

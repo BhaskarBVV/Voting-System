@@ -3,6 +3,7 @@ import bcrypt
 import maskpass
 from utilities.utility import util
 import configuration.config as cf
+from  colprint.colprint import newprint as col
 from user.user_choice import options
 
 
@@ -28,7 +29,7 @@ class Auth:
                 if util.check_is_user_approved(user_id)[0][0] == 0 or False:
                     print("You are not yet approved, please wait until approval")
                     return
-            print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n")
+            col.col_print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n","Yellow")
             is_logged_in=True
             while is_logged_in:
                 is_logged_in=Auth.display_options(user_type, user_id)
@@ -44,9 +45,9 @@ class Auth:
 
         while not bcrypt.checkpw(input_password, stored_pass.encode('utf-8')):
             if tries == 0:
-                print("Incorrect password, try again !")
+                col.col_print("Incorrect password, try again !","Red")
                 return False
-            print(f'Invlaid password, {tries} tries left')
+            col.col_print(f'Invlaid password, {tries} tries left',"red")
             tries -= 1
             input_password = maskpass.advpass().encode('utf-8')
         else:
@@ -55,6 +56,5 @@ class Auth:
     def sign_up():
         result = registration.Register.reg_new_user()
         if result[0] == True:
-            print(f'''Successfully regiistered\n
-            Your UserId is : {result[1]}, please remember it !!''')
+            col.col_print(f'''\nSuccessfully regiistered\nYour UserId is : {result[1]}, please remember it !!''',"cyan")
         return True

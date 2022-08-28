@@ -8,7 +8,7 @@ class Options:
         return fontstyle.apply(text, col)
 
     def get_choice(available_op):
-        print("Select from Available options : ")
+        print(Options.col("Select from Available options : ","darkcyan"))
         table = [[idx, x] for idx, x in enumerate(available_op, 0)]
         print(tabulate(table, headers=[
               "Enter", "Operation"], tablefmt='fancy_grid'))

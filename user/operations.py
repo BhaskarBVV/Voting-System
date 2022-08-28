@@ -274,7 +274,7 @@ class AllOperation:
         sql_command = "select * from User"
         result = Util.fetch_data(sql_command)
         col.col_print(
-            "\n-------------------------------------------Showing all Records-------------------------------------------", "green")
+            "\n-------------------------------------------Showing all Records-------------------------------------------\n", "green")
         all_users = []
         for record in result:
             temp = []
@@ -283,8 +283,8 @@ class AllOperation:
                     temp.append(i)
             all_users.append(temp)
         print(tabulate(all_users, headers=[
-              "S.No.", "Name",  "Fathers Name", "Aadhar card", "DoB", "Contact", "Email", "City", "Gender"]))
-        print("\n---------------------------------------------------------------------------------------------------------")
+              "S.No.", "Name",  "Fathers Name", "Aadhar card", "DoB", "Contact", "Email", "City", "Gender"], tablefmt='fancy_grid'))
+        print("\n---------------------------------------------------------------------------------------------------------\n\n")
         return True
 
 # -------------------------------------------------------------------------------------------------------------------------------------

@@ -7,26 +7,26 @@ dashboard = "\n=======================**DASHBOARD**=============================
 Invalid = "\n---Opps, its an Invalid Choice, try again...\n"
 
 roles = {
-    0: ["Edit details", "Give vote", "Check on going Elections", "Log out"],  # user
-    1: ["Check on going Elections", "Start Elections", "Add Party", "Register user",
-        "Edit details", "Approve the user for login", "Show all Users", "Check if user is approved",
-        "Make admin", "Close Elections", "Election Results", "Log out"]  # admin
+    0: ["Edit_details", "Give_vote", "Check_on_going_Elections", "Log_out"],  # user
+    1: ["Check_on_going_Elections", "Start_Elections", "Add_Party", "Register_user",
+        "Edit_details", "Approve_the_user_for_login", "Show_all_Users", "Check_if_user_is_approved",
+        "Make_admin", "Close_Elections", "Election_Results", "Log_out"]  # admin
 
 }
 role_function_mapping = {
-    "Edit details": op.AllOperation.edit_details,
-    "Give vote": op.AllOperation.give_vote,
-    "Check on going Elections": op.AllOperation.check_on_going_elections,
-    "Start Elections": op.AllOperation.start_election,
-    "Add Party": op.AllOperation.add_party,
-    "Check if user is approved": op.AllOperation.is_approved,
-    "Make admin": op.AllOperation.make_admin,
-    "Close Elections": op.AllOperation.close_elections,
-    "Election Results": op.AllOperation.results,
-    "Log out": op.AllOperation.log_out,
-    "Register user": op.AllOperation.register_new_user,
-    "Approve the user for login": op.AllOperation.approve_user_login,
-    "Show all Users": op.AllOperation.show_all_users
+    "Edit_details": op.AllOperation.edit_details,
+    "Give_vote": op.AllOperation.give_vote,
+    "Check_on_going_Elections": op.AllOperation.check_on_going_elections,
+    "Start_Elections": op.AllOperation.start_election,
+    "Add_Party": op.AllOperation.add_party,
+    "Check_if_user_is_approved": op.AllOperation.is_approved,
+    "Make_admin": op.AllOperation.make_admin,
+    "Close_Elections": op.AllOperation.close_elections,
+    "Election_Results": op.AllOperation.results,
+    "Log_out": op.AllOperation.log_out,
+    "Register_user": op.AllOperation.register_new_user,
+    "Approve_the_user_for_login": op.AllOperation.approve_user_login,
+    "Show_all_Users": op.AllOperation.show_all_users
 }
 
 user_fields = {
@@ -39,4 +39,4 @@ user_fields = {
     "Gender": "gender"
 }
 
-main_menu = ["Exit", "Sign Up", "Sign In"]
+main_menu = ["Exit", "Sign_Up", "Sign_In"]

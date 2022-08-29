@@ -9,7 +9,7 @@ class Options:
 
     def get_choice(available_op):
         print(Options.col("Select from Available options : ","darkcyan"))
-        table = [[idx, x] for idx, x in enumerate(available_op, 0)]
+        table = [[idx, (" ").join(x.split("_"))] for idx, x in enumerate(available_op, 0)]
         print(tabulate(table, headers=[
               "Enter", "Operation"], tablefmt='fancy_grid'))
         choice = input("Enter your choice : ")

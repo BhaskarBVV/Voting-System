@@ -9,7 +9,7 @@ class Main:
 
     def entry_loop():
         col.col_print(dashboard, "Yellow")
-        operations = [[idx, x] for idx, x in enumerate(main_menu, 0)]
+        operations = [[idx, (" ").join(x.split("_"))] for idx, x in enumerate(main_menu, 0)]
         print(tabulate(operations, headers=[
               "Enter", "Operation"], tablefmt='fancy_grid'))
 

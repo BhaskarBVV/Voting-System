@@ -8,7 +8,7 @@ def test1():
 def test2():
     dob="2000-10-05"
     age=int(validate.Validate.get_age(dob))
-    assert age == 21
+    assert age == 20
 
 def test3():
     dob="2001-08-27"

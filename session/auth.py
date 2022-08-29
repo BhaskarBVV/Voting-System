@@ -16,7 +16,6 @@ class Auth:
             current_user_from_db = list(Util.find_id(user_id))
         except:
             col.col_print("Invalid user, try again....", "red")
-
             Auth.login()
         else:
             if len(current_user_from_db) == 0:

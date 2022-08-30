@@ -1,0 +1,13 @@
+<SQL_COMMANDS>
+<SELECT_ALL>select * from {}</SELECT_ALL>
+<ELECTION_STATUS>select status from Election_Year where year={}</ELECTION_STATUS>
+<ADD_ELECTION>insert into Election_Year values({},{})</ADD_ELECTION>
+<DEL_CUR_VOTE_RECORD>delete from VoteRecord where user_id!=-1</DEL_CUR_VOTE_RECORD>
+<CLOSE_ELECTIONS>Update Election_Year set status=2 where year={}</CLOSE_ELECTIONS>
+<COUNT_VOTE_RECORD>select count(*) from VoteRecord where vote_id={}</COUNT_VOTE_RECORD>
+<ADD_ELECTION_RESULT>insert into Result values({},{},{})</ADD_ELECTION_RESULT>
+<ADD_PARTY>insert into Party values({},"{}")</ADD_PARTY>
+<GET_USER_VOTE_RECORD>select * from VoteRecord where user_id={}</GET_USER_VOTE_RECORD>
+<GIVE_VOTE>insert into VoteRecord values({},{},{})</GIVE_VOTE>
+<PREV_RESULT>select P.party_name, R.votes from Result R, Party P where election_year={} and P.party_id=R.party_id</PREV_RESULT>
+</SQL_COMMANDS>

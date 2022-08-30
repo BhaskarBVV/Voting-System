@@ -1,5 +1,5 @@
 import mysql.connector
-
+from bs4 import BeautifulSoup
 
 class Util:
 
@@ -50,3 +50,10 @@ class Util:
     def check_is_user_approved(id):
         sql_command = f'select is_approved from Approval where user_id={id}'
         return Util.fetch_data(sql_command)
+    
+    def get_sql_command(command):
+        with open('D://codes//Editors//python//Voting-System//configuration//queries.xml', 'r') as f:
+            data = f.read()
+        Bs_data = BeautifulSoup(data, "xml")
+        full_sql_command = Bs_data.select(command)
+        return full_sql_command[0].get_text()

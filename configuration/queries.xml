@@ -17,4 +17,10 @@
 <ADD_USER>insert into project2.User values({},"{}","{}",{},"{}",{},"{}","{}","{}","{}")</ADD_USER>
 <GET_COUNT_OF_RECORDS>select count(*) from {}</GET_COUNT_OF_RECORDS>
 <GET_USER_RECORDS>select * from User where user_id={}</GET_USER_RECORDS>
+<GET_AADHAR>select aadhaar_number from User</GET_AADHAR>
+<GET_DOB>select dob from User where user_id={}</GET_DOB>
+<UPDATE_ROLE>Update Role set role_id=1 where user_id={}</UPDATE_ROLE>
+<UPDATE_USER>update User set {}="{}" where user_id={}</UPDATE_USER>
+<APPROVE_USER>select u.user_id, u.dob, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0</APPROVE_USER>
+<UPDATE_APPROVAL>update Approval set is_approved={} where user_id={}</UPDATE_APPROVAL>
 </SQL_COMMANDS>

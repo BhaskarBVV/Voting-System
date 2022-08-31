@@ -32,7 +32,8 @@ class Register:
         return [is_addition_successful, new_user_id]
 
     def get_aadhar_number():
-        sql_command = f'select aadhaar_number from User'
+        # sql_command = f'select aadhaar_number from User'
+        sql_command=utility.Util.get_sql_command("GET_AADHAR");
         result = utility.Util.fetch_data(sql_command)
         all_aadhar=[i[0] for i in result]
         while True:

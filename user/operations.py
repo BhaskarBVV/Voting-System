@@ -42,13 +42,11 @@ class AllOperation:
         elif result[0][0] == 1:
             col.col_print("\n---Already an Admin---\n", "green")
             return True
-        sql_command = 'select dob from User where user_id={}'.format(
-            str(user_id))
+        sql_command=Util.get_sql_command("GET_DOB").format(str(user_id));
         dob = Util.fetch_data(sql_command)[0][0]
         user_age = int(validate.Validate.get_age(dob))
         if user_age >= 18:
-            sql_command = 'Update Role set role_id=1 where user_id={}'.format(
-                str(user_id))
+            sql_command=Util.get_sql_command("UPDATE_ROLE").format(str(user_id));
             Util.write_data(sql_command)
             col.col_print(
                 f"\n----Successfully made {user_id} as Admin----\n", "green")
@@ -62,7 +60,6 @@ class AllOperation:
                         "Contact", "Email", "City", "Gender"]
         choice = user_choice.Options.get_choice(available_op)
         choice = config.user_fields[choice]
-        # print(choice)
         new_data = ""
         if choice == "dob":
             new_data = validate.Validate.validate_dob()
@@ -74,8 +71,7 @@ class AllOperation:
             new_data = validate.Validate.validate_gen()
         else:
             new_data = input(f"Enter your {choice}...:")
-        sql_command = f'update User set {choice}="{new_data}" where user_id={user_id}'
-        # print(sql_command)
+        sql_command=Util.get_sql_command("UPDATE_USER").format(choice,new_data,user_id);
         Util.write_data(sql_command)
         col.col_print(
             "\n----Successfully update your information----\n", "green")
@@ -93,12 +89,12 @@ class AllOperation:
 # -------------------------------------------------------------------------------------------------------------------------------------
 
     def approve_user_login(admin_id):
-        sql_command = f"select u.user_id, u.dob, a.is_approved from User u, Approval a where u.user_id=a.user_id and a.is_approved=0"
+        sql_command=Util.get_sql_command("APPROVE_USER");
         result = Util.fetch_data(sql_command)
         for user in result:
             user_age = int(validate.Validate.get_age(user[1]))
             if user_age >= 18:
-                sql_command = f'update Approval set is_approved={1} where user_id={user[0]}'
+                sql_command=Util.get_sql_command("UPDATE_APPROVAL").format(1,user[0]);
                 Util.write_data(sql_command)
         col.col_print(
             "\n----All valid users have been approved----\n", "green")
@@ -108,7 +104,7 @@ class AllOperation:
 # -------------------------------------------------------------------------------------------------------------------------------------
 
     def show_all_users(admin_id):
-        sql_command = "select * from User"
+        sql_command=Util.get_sql_command("SELECT_ALL").format("User");
         result = Util.fetch_data(sql_command)
         col.col_print(
             "\n-------------------------------------------Showing all Records-------------------------------------------\n", "green")

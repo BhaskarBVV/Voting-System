@@ -9,6 +9,16 @@ from utilities.colprint.colprint import NewPrint as col
 
 class AllOperation:
 
+    def get_user_id():
+        user_id = input("Enter your Id : ")
+        try:
+            user_id = int(user_id)
+        except:
+            col.col_print("Invalid user Id", "red")
+            return AllOperation.get_user_id()
+        else:
+            return user_id
+
     def is_approved(admin_id):
         user_id = AllOperation.get_user_id()
         result = Util.check_is_user_approved(user_id)

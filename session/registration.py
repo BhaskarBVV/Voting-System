@@ -22,13 +22,13 @@ class Register:
         password = str(bcrypt.hashpw(password, bcrypt.gensalt()).decode())
         number_of_records = utility.Util.get_number_of_records("User")[0][0]
         new_user_id = number_of_records + 1
-        try:
-            is_addition_successful = utility.Util.add_new_record([new_user_id, name, fathers_name,
+        # try:
+        is_addition_successful = utility.Util.add_new_record([new_user_id, name, fathers_name,
                                                                   aadhar_number, dob, contact, email, city, password, gender])
-        except:
-            print(
-                "\n----Aadhar number already exists, enter correct Aadhar card number...\n")
-            return [False, -1]
+        # except:
+            # print(
+            #     "\n----Some error o...\n")
+            # return [False, -1]
         return [is_addition_successful, new_user_id]
 
     def get_aadhar_number():

@@ -110,16 +110,6 @@ class AllOperation:
                 f"\n---Successfully added the party '{party_name}'---\n", "green")
         return True
 
-    def get_user_id():
-        user_id = input("Enter your Id : ")
-        try:
-            user_id = int(user_id)
-        except:
-            col.col_print("Invalid user Id", "red")
-            return AllOperation.get_user_id()
-        else:
-            return user_id
-
 # -------------------------------------------------------------------------------------------------------------------------------------
 
     def give_vote(user_id):

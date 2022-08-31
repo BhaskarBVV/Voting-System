@@ -5,8 +5,7 @@ class Util:
 
     def start_connection():
         try:
-            connection = mysql.connector.connect(
-                host='localhost', user='root', passwd='1234', database='project2')
+            connection = mysql.connector.connect(host='localhost', user='root', passwd='1234', database='project2')
             my_cursor = connection.cursor()
             return (connection, my_cursor)
         except:
@@ -26,29 +25,28 @@ class Util:
         connection.close()
 
     def find_id(id):
-        sql_command = 'select * from User where user_id={}'.format(str(id))
+        sql_command=Util.get_sql_command("GET_USER_RECORDS").format(str(id))
         return Util.fetch_data(sql_command)
 
     def get_number_of_records(table_name):
-        sql_command = f'select count(*) from {table_name};'
+        sql_command=Util.get_sql_command("GET_COUNT_OF_RECORDS").format(table_name)
         return Util.fetch_data(sql_command)
 
     def add_new_record(user_record):
-        sql_command = f'''insert into project2.User values({user_record[0]},"{user_record[1]}","{user_record[2]}",
-                    {user_record[3]},"{user_record[4]}",{user_record[5]},"{user_record[6]}","{user_record[7]}","{user_record[8]}","{user_record[9]}");'''
+        sql_command=Util.get_sql_command("ADD_USER").format(user_record[0],user_record[1],user_record[2],user_record[3],user_record[4],user_record[5],user_record[6],user_record[7],user_record[8],user_record[9])
         Util.write_data(sql_command)
-        sql_command = f'insert into project2.Role values({user_record[0]},{0});'
+        sql_command=Util.get_sql_command("ADD_ROLE").format(user_record[0],0)
         Util.write_data(sql_command)
-        sql_command = f'insert into project2.Approval values({user_record[0]},{0});'
+        sql_command=Util.get_sql_command("ADD_APPROVAL").format(user_record[0],0)
         Util.write_data(sql_command)
         return True
 
     def get_user_type(id):
-        sql_command = f'select role_id from Role where user_id="{id}"'
+        sql_command=Util.get_sql_command("GET_ROLE").format(id)
         return Util.fetch_data(sql_command)
 
     def check_is_user_approved(id):
-        sql_command = f'select is_approved from Approval where user_id={id}'
+        sql_command = Util.get_sql_command("GET_APPROVAL").format(id) 
         return Util.fetch_data(sql_command)
     
     def get_sql_command(command):

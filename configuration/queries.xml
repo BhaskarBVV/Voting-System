@@ -10,4 +10,11 @@
 <GET_USER_VOTE_RECORD>select * from VoteRecord where user_id={}</GET_USER_VOTE_RECORD>
 <GIVE_VOTE>insert into VoteRecord values({},{},{})</GIVE_VOTE>
 <PREV_RESULT>select P.party_name, R.votes from Result R, Party P where election_year={} and P.party_id=R.party_id</PREV_RESULT>
+<GET_ROLE>select role_id from Role where user_id={}</GET_ROLE>
+<GET_APPROVAL>select is_approved from Approval where user_id='{}'</GET_APPROVAL>
+<ADD_ROLE>insert into project2.Role values({},{})</ADD_ROLE>
+<ADD_APPROVAL>insert into project2.Approval values({},{})</ADD_APPROVAL>
+<ADD_USER>insert into project2.User values({},"{}","{}",{},"{}",{},"{}","{}","{}","{}")</ADD_USER>
+<GET_COUNT_OF_RECORDS>select count(*) from {}</GET_COUNT_OF_RECORDS>
+<GET_USER_RECORDS>select * from User where user_id={}</GET_USER_RECORDS>
 </SQL_COMMANDS>

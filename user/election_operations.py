@@ -42,7 +42,7 @@ class AllOperation:
 
         sql_command = Util.get_sql_command("ADD_ELECTION").format(cur_year,1)
         Util.write_data(sql_command)
-        sql_command = Util.get_sql_command("DEL_CUR_VOTE_RECORD")
+        sql_command = "call DelVoteRecord"
         Util.write_data(sql_command)
         col.col_print(f"\n---Elections of {cur_year} have begun---\n", "green")
         return True

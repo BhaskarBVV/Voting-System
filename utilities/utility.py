@@ -5,7 +5,7 @@ class Util:
 
     def start_connection():
         try:
-            connection = mysql.connector.connect(host='localhost', user='root', passwd='root', database='project2')
+            connection = mysql.connector.connect(host='localhost', user='root', passwd='1234', database='project2')
             my_cursor = connection.cursor()
             return (connection, my_cursor)
         except:
@@ -50,7 +50,7 @@ class Util:
         return Util.fetch_data(sql_command)
     
     def get_sql_command(command):
-        with open('Voting-System//configuration//queries.xml', 'r') as f:
+        with open('D://codes//Editors//python//Voting-System//configuration//queries.xml', 'r') as f:
             data = f.read()
         Bs_data = BeautifulSoup(data, "xml")
         full_sql_command = Bs_data.select(command)

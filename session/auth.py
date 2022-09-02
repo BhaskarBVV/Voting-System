@@ -27,11 +27,9 @@ class Auth:
             user_type = Util.get_user_type(user_id)[0][0]
             if user_type != 1:
                 if Util.check_is_user_approved(user_id)[0][0] == 0 or False:
-                    col.col_print(
-                        "You are not yet approved, please wait until approval", "red")
+                    col.col_print("You are not yet approved, please wait until approval", "red")
                     return
-            col.col_print(
-                f"\n---------Welcome {current_user_from_db[0][1]}---------\n", "Yellow")
+            col.col_print(f"\n---------Welcome {current_user_from_db[0][1]}---------\n", "Yellow")
             is_logged_in = True
             while is_logged_in:
                 is_logged_in = Auth.display_options(user_type, user_id)
@@ -53,8 +51,7 @@ class Auth:
     def sign_up():
         result = registration.Register.reg_new_user()
         if result[0] == True:
-            col.col_print(
-                f'''\nSuccessfully regiistered\nYour UserId is : {result[1]}, please remember it !!\n''', "cyan")
+            col.col_print(f'''\nSuccessfully regiistered\nYour UserId is : {result[1]}, please remember it !!\n''', "cyan")
         return True
 
     def display_options(user_type, user_id):

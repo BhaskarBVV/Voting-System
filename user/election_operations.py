@@ -32,12 +32,10 @@ class AllOperation:
         result = Util.fetch_data(sql_command)
         if len(result) != 0:
             if result[0][0] == 2:
-                col.col_print(
-                    f"\n---Elections of {cur_year} are over---\n", "red")
+                col.col_print(f"\n---Elections of {cur_year} are over---\n", "red")
                 return True
             else:
-                col.col_print(
-                    f'\n---Elections of {cur_year} have already been started---\n', "red")
+                col.col_print(f'\n---Elections of {cur_year} have already been started---\n', "red")
                 return True
 
         sql_command = Util.get_sql_command("ADD_ELECTION").format(cur_year,1)
@@ -54,17 +52,14 @@ class AllOperation:
         sql_command = Util.get_sql_command("ELECTION_STATUS").format(cur_year)
         result = Util.fetch_data(sql_command)
         if len(result) == 0:
-            col.col_print(
-                f'\n---Elections of {cur_year} have not been started yet---\n', "red")
+            col.col_print(f'\n---Elections of {cur_year} have not been started yet---\n', "red")
         elif result[0][0] == 1:
             sql_command = Util.get_sql_command("CLOSE_ELECTIONS").format(cur_year)
             Util.write_data(sql_command)
             AllOperation.fetch_and_store_results(cur_year)
-            col.col_print(
-                f'\n---Elections of {cur_year} have been closed---\n', "green")
+            col.col_print(f'\n---Elections of {cur_year} have been closed---\n', "green")
         elif result[0][0] == 2:
-            col.col_print(
-                f'\n---Elections of {cur_year} have already been closed---\n', "red")
+            col.col_print(f'\n---Elections of {cur_year} have already been closed---\n', "red")
         return True
 
 # -------------------------------------------------------------------------------------------------------------------------------------

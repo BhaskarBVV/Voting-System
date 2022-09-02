@@ -33,7 +33,7 @@ class Register:
 
     def get_aadhar_number():
         # sql_command = f'select aadhaar_number from User'
-        sql_command=utility.Util.get_sql_command("GET_AADHAR");
+        sql_command=utility.Util.get_sql_command("GET_AADHAR")
         result = utility.Util.fetch_data(sql_command)
         all_aadhar=[i[0] for i in result]
         while True:
